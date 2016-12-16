@@ -16,6 +16,7 @@ export default class App extends Component {
   componentDidMount () {
     axios.get('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses')
     .then(res => {
+      console.log(res.data.businesses)
       this.setState({
         businesses: res.data.businesses,
         page: 1
@@ -24,13 +25,13 @@ export default class App extends Component {
   }
 
   loadMoreBusinesses () {
-    //set a new page to get bussinesses from
+    //set a new page to get businesses from
     let newPage = this.state.page + 1
 
     axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses?page=${newPage}`)
     .then(res => {
 
-      //Concat the new bussinesses with the old ones
+      //Concat the new businesses with the old ones
       let businesses = this.state.businesses.concat(res.data.businesses)
 
       //Set the updated list to state

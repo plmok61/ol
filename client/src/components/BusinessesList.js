@@ -1,12 +1,14 @@
 import React from 'react'
+import BusinessListItem from './BusinessListItem'
 
 const BusinessesList = ({ businesses }) => (
   <div>
     {
       businesses.map((business, key) => (
-        <div key={key}>
-          {business.name}
-        </div>
+        <BusinessListItem
+          key={key}
+          business={business}
+        />
       ))
     }
   </div>
