@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const path = require('path')
+const router = require('./routes/routes')
 const port = 8081
 
 var http = require('http').Server(app)
@@ -15,6 +16,7 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, '../dist')))
+app.use('/', router)
 
 const server = http.listen(port)
 console.log(`Server is running on port: ${port}`)
