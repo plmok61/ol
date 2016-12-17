@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import BusinessListItem from './BusinessListItem'
 import axios from 'axios'
 
@@ -51,11 +52,10 @@ export default class BusinessesList extends Component {
     return (
       <div>
         {
-          this.state.businesses.map((business, key) => (
-            <BusinessListItem
-              key={key}
-              business={business}
-            />
+          this.state.businesses.map((business,key) => (
+              <BusinessListItem key={key} business={business}/>
+            
+            
           ))
         }
         <button onClick={this.loadMoreBusinesses}>Load More</button>
