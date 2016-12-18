@@ -10,7 +10,7 @@ export default class Business extends Component {
   }
 
   componentDidMount () {
-    axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/${this.props.params}`)
+    axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/${this.props.params.id}`)
       .then(res => {
         this.setState({
           business: res.data
@@ -20,10 +20,12 @@ export default class Business extends Component {
   }
 
   render () {
+    const { name, address, address2, city, country, phone, state, website, zip } = this.state.business
+    
     if (this.state.business) {
       return (
         <div>
-          {this.state.business.name}
+          {name}
         </div>
       )
     } else {
