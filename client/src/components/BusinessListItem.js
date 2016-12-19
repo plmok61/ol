@@ -7,7 +7,7 @@ const BusinessListItem = ({ business }) => {
   } 
 
   return (
-    <div onClick={viewBusiness}>
+    <div onClick={viewBusiness} className="business-list-item">
       {business.name}
     </div>
   )

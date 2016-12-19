@@ -1,11 +1,12 @@
 .pagination-buttons {
   text-align: center;
-  margin: auto;
+  margin: 10px auto 20px auto;
 }
 
 .pagination-btn {
   width: 50px;
   display: inline-block;
+  margin: 0 2px 0 2px;
 }
 
 .current-page {

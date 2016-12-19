@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 import BusinessListItem from './BusinessListItem'
 import PaginationButtons from './PaginationButtons'
@@ -49,21 +50,37 @@ export default class BusinessesList extends Component {
     const { first, last, next, prev } = this.state.pages
 
       return (
-        <div className="list-container">
-          {
-            this.state.businesses.map((business,key) => (
-              <BusinessListItem key={key} business={business}/>
-            ))
-          }
-          <PaginationButtons
-            first={first}
-            last={last}
-            next={next}
-            prev={prev}
-            loadBusinesses={this.loadBusinesses}
-            currentPage={this.state.currentPage}
-          />
-        </div>
+        <Grid>
+          <Row>
+            <Col xs={12} sm={12} md={9} lg={6}>
+              <div>
+                <PaginationButtons
+                  first={first}
+                  last={last}
+                  next={next}
+                  prev={prev}
+                  loadBusinesses={this.loadBusinesses}
+                  currentPage={this.state.currentPage}
+                />
+                <div className="business-list">
+                {
+                  this.state.businesses.map((business,key) => (
+                    <BusinessListItem key={key} business={business}/>
+                  ))
+                }
+                </div>
+                <PaginationButtons
+                  first={first}
+                  last={last}
+                  next={next}
+                  prev={prev}
+                  loadBusinesses={this.loadBusinesses}
+                  currentPage={this.state.currentPage}
+                />
+              </div>
+            </Col>
+          </Row>
+        </Grid>
       )
     } else if (this.state.businesses.length === 0) {
       return <div>No more businesses</div>
