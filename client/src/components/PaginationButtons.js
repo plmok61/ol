@@ -4,7 +4,11 @@ const PaginationButtons = ({ first, last, next, prev, loadBusinesses, currentPag
   const handleSearch = (event) => {
     event.preventDefault()
     const page = document.getElementById('pageSearch').value
-    loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}`)
+    if (page > 1000 || page < 1) {
+      alert('Must be between 1 - 1000')
+    } else {
+      loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}`)
+    }
   }
   return (
     <div>

@@ -3,6 +3,7 @@ import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 're
 
 import BusinessesList from './BusinessesList'
 import Business from './Business'
+import NotFound from './NotFound'
 
 export default class App extends Component {
   render () {
@@ -12,6 +13,7 @@ export default class App extends Component {
           <Route path='/' component={BusinessesList} />
           <Route path='/:page' component={BusinessesList} />
           <Route path='/businesses/:id' component={Business} />
+          <Route path='*' component={NotFound} />
         </Router>
       </div>
     )
