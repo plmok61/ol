@@ -50,12 +50,10 @@ export default class BusinessesList extends Component {
 
   render () {
     return (
-      <div>
+      <div className="list-container">
         {
           this.state.businesses.map((business,key) => (
-              <BusinessListItem key={key} business={business}/>
-            
-            
+            <BusinessListItem key={key} business={business}/>
           ))
         }
         <button onClick={this.loadMoreBusinesses}>Load More</button>

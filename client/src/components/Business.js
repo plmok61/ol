@@ -20,12 +20,15 @@ export default class Business extends Component {
   }
 
   render () {
-    const { name, address, address2, city, country, phone, state, website, zip } = this.state.business
+    const { name, address, address2, city, state, country, zip, phone, website } = this.state.business
     
     if (this.state.business) {
       return (
         <div>
-          {name}
+          <h3>{name}</h3>
+          <div>{address} {address2}</div>
+          <div>{city}, {state}, {country} {zip}</div>
+          <div>{phone} - {website}</div>
         </div>
       )
     } else {
