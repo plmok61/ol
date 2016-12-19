@@ -11,7 +11,7 @@ export default class App extends Component {
       <div>
         <Router history={hashHistory}>
           <Route path='/' component={BusinessesList} />
-          <Route path='/:page' component={BusinessesList} />
+          <Route path='/pages/:page' component={BusinessesList} />
           <Route path='/businesses/:id' component={Business} />
           <Route path='*' component={NotFound} />
         </Router>
