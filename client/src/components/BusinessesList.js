@@ -17,7 +17,7 @@ export default class BusinessesList extends Component {
   }
 
   componentDidMount () {
-    this.loadBusinesses('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=1')
+    this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${this.props.params.page}`)
   }
 
   loadBusinesses (url) {
