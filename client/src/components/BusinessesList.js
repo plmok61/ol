@@ -20,25 +20,7 @@ export default class BusinessesList extends Component {
     this.loadBusinesses('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=1')
   }
 
-  //Probably will get rid of this but saving for now.
-  loadBusinessesByPage () {
-    let page
-    this.props.params.page !== undefined ? page = this.props.params.page : page = ''
-    axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}`)
-    .then(res => {
-      console.log(res.data.pages)
-      this.setState({
-        businesses: res.data.businesses,
-        pages: res.data.pages
-      })
-    })
-    .catch(err => {
-      console.log('Error getting businesses: ',err)
-    })
-  }
-
   loadBusinesses (url) {
-
     //Gets the page number from the url
     const pageNumber = url.replace(/^[^=]+=/,"")
 
