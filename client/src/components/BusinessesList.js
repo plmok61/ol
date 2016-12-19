@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import BusinessListItem from './BusinessListItem'
 import axios from 'axios'
+
+import BusinessListItem from './BusinessListItem'
+import PaginationButtons from './PaginationButtons'
 
 export default class BusinessesList extends Component {
   constructor (props) {
@@ -62,8 +64,13 @@ export default class BusinessesList extends Component {
               <BusinessListItem key={key} business={business}/>
             ))
           }
-          <button onClick={() => this.loadBusinesses(prev)}>prev</button>
-          <button onClick={() => this.loadBusinesses(next)}>next</button>
+          <PaginationButtons
+            first={first}
+            last={last}
+            next={next}
+            prev={prev}
+            loadBusinesses={this.loadBusinesses}
+          />
         </div>
       )
     } else {
