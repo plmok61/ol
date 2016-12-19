@@ -1,0 +1,19 @@
+.pagination-buttons {
+  text-align: center;
+  margin: auto;
+}
+
+.pagination-btn {
+  width: 50px;
+  display: inline-block;
+}
+
+.current-page {
+  width: 50px;
+  display: inline-block;
+}
+
+.page-search-form {
+  display: inline-block;
+  margin-left: 5px;
+}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import axios from 'axios'
 
 import BusinessListItem from './BusinessListItem'
@@ -9,7 +8,7 @@ export default class BusinessesList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      businesses: [],
+      businesses: false,
       pages: null,
       currentPage: null
     }
@@ -31,7 +30,6 @@ export default class BusinessesList extends Component {
 
     axios.get(url)
       .then(res => {
-        console.log(res)
         this.setState({
           businesses: res.data.businesses,
           pages: res.data.pages,
@@ -46,7 +44,7 @@ export default class BusinessesList extends Component {
 
 
   render () {
-    if (this.state.businesses.length > 0) {
+    if (this.state.businesses && this.state.businesses.length > 0) {
 
     const { first, last, next, prev } = this.state.pages
 
@@ -67,6 +65,8 @@ export default class BusinessesList extends Component {
           />
         </div>
       )
+    } else if (this.state.businesses.length === 0) {
+      return <div>No more businesses</div>
     } else {
       return <div>loading</div>
     }
