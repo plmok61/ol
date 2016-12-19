@@ -11,13 +11,13 @@ export default class BusinessesList extends Component {
     this.state = {
       businesses: [],
       pages: null,
-      currentPage: 1
+      currentPage: null
     }
     this.loadBusinesses = this.loadBusinesses.bind(this)
   }
 
   componentDidMount () {
-    this.loadBusinesses('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/')
+    this.loadBusinesses('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=1')
   }
 
   //Probably will get rid of this but saving for now.
@@ -38,17 +38,23 @@ export default class BusinessesList extends Component {
   }
 
   loadBusinesses (url) {
+
+    //Gets the page number from the url
+    const pageNumber = url.replace(/^[^=]+=/,"")
+
     axios.get(url)
-    .then(res => {
-      console.log(res.data.pages)
-      this.setState({
-        businesses: res.data.businesses,
-        pages: res.data.pages
+      .then(res => {
+        console.log(res.data.pages)
+        this.setState({
+          businesses: res.data.businesses,
+          pages: res.data.pages,
+          currentPage: pageNumber
+        })
+        window.location = `/#/${pageNumber}`
       })
-    })
-    .catch(err => {
-      console.log('Error getting businesses: ',err)
-    })
+      .catch(err => {
+        console.log('Error getting businesses: ',err)
+      })
   }
 
 
@@ -70,6 +76,7 @@ export default class BusinessesList extends Component {
             next={next}
             prev={prev}
             loadBusinesses={this.loadBusinesses}
+            currentPage={this.state.currentPage}
           />
         </div>
       )
