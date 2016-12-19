@@ -17,13 +17,11 @@ export default class BusinessesList extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props.params.page)
     //Set page number to 1 on initial load
     let pageNumber = this.props.params.page
     if (typeof pageNumber !== 'number') {
       pageNumber = 1
     }
-    console.log(pageNumber)
     this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${pageNumber}`)
   }
 
@@ -33,6 +31,7 @@ export default class BusinessesList extends Component {
 
     axios.get(url)
       .then(res => {
+        console.log(res)
         this.setState({
           businesses: res.data.businesses,
           pages: res.data.pages,
