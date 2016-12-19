@@ -8,18 +8,26 @@ export default class BusinessesList extends Component {
     super(props)
     this.state = {
       businesses: [],
-      page: null
+      pages: null,
+      currentPage: 1
     }
-    this.loadMoreBusinesses = this.loadMoreBusinesses.bind(this)
+    this.loadBusinesses = this.loadBusinesses.bind(this)
   }
 
   componentDidMount () {
-    axios.get('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses')
+    this.loadBusinesses('http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/')
+  }
+
+  //Probably will get rid of this but saving for now.
+  loadBusinessesByPage () {
+    let page
+    this.props.params.page !== undefined ? page = this.props.params.page : page = ''
+    axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}`)
     .then(res => {
-      console.log(res.data.businesses)
+      console.log(res.data.pages)
       this.setState({
         businesses: res.data.businesses,
-        page: 1
+        pages: res.data.pages
       })
     })
     .catch(err => {
@@ -27,37 +35,39 @@ export default class BusinessesList extends Component {
     })
   }
 
-  loadMoreBusinesses () {
-    //set a new page to get businesses from
-    let newPage = this.state.page + 1
-
-    axios.get(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses?page=${newPage}`)
+  loadBusinesses (url) {
+    axios.get(url)
     .then(res => {
-
-      //Concat the new businesses with the old ones
-      let businesses = this.state.businesses.concat(res.data.businesses)
-
-      //Set the updated list to state
+      console.log(res.data.pages)
       this.setState({
-        businesses: businesses,
-        page: newPage
+        businesses: res.data.businesses,
+        pages: res.data.pages
       })
     })
     .catch(err => {
       console.log('Error getting businesses: ',err)
     })
   }
+
 
   render () {
-    return (
-      <div className="list-container">
-        {
-          this.state.businesses.map((business,key) => (
-            <BusinessListItem key={key} business={business}/>
-          ))
-        }
-        <button onClick={this.loadMoreBusinesses}>Load More</button>
-      </div>
-    )
+    if (this.state.businesses.length > 0) {
+
+    const { first, last, next, prev } = this.state.pages
+
+      return (
+        <div className="list-container">
+          {
+            this.state.businesses.map((business,key) => (
+              <BusinessListItem key={key} business={business}/>
+            ))
+          }
+          <button onClick={() => this.loadBusinesses(prev)}>prev</button>
+          <button onClick={() => this.loadBusinesses(next)}>next</button>
+        </div>
+      )
+    } else {
+      return <div>loading</div>
+    }
   }
 }
