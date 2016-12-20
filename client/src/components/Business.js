@@ -20,15 +20,24 @@ export default class Business extends Component {
   }
 
   render () {
-    const { name, address, address2, city, state, country, zip, phone, website } = this.state.business
-    
+    const { name, address, address2, city, state, country, zip, website } = this.state.business
+
+
     if (this.state.business) {
+    //Make the phone number look pretty
+    let phone = this.state.business.phone
+    let areaCode = phone.slice(0, 3)
+    let firstThree = phone.slice(3, 6)
+    let lastFour = phone.slice(6)
+    phone = `${areaCode}-${firstThree}-${lastFour}`
+    console.log(phone)
       return (
-        <div>
+        <div className="business">
           <h3>{name}</h3>
           <div>{address} {address2}</div>
           <div>{city}, {state}, {country} {zip}</div>
-          <div>{phone} - {website}</div>
+          <div>phone: {phone}</div>
+          <div><a href={website}>Website</a></div>
         </div>
       )
     } else {
