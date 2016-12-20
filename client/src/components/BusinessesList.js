@@ -11,32 +11,35 @@ export default class BusinessesList extends Component {
     this.state = {
       businesses: false,
       pages: null,
-      currentPage: null
+      currentPage: null,
     }
     this.loadBusinesses = this.loadBusinesses.bind(this)
   }
 
   componentDidMount () {
     //Set page number to 1 on initial load
-    let pageNumber = this.props.params.page
-    if (typeof pageNumber !== 'number') {
+    let pageNumber = parseInt(this.props.params.page)
+    if (isNaN(pageNumber)) {
       pageNumber = 1
     }
-    this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${pageNumber}`)
+    this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${pageNumber}&per_page=50`)
   }
 
   loadBusinesses (url) {
     //Gets the page number from the url
-    let pageNumber = url.replace(/^[^=]+=/,"")
-
+    const pageNumberString = url.match(/&|\?page=(\d+)/)
+    const pageNumber= parseInt(pageNumberString[0].slice(6))
+    console.log('pageNumber: ', typeof pageNumber)
     axios.get(url)
       .then(res => {
+        console.log(res)
         this.setState({
           businesses: res.data.businesses,
           pages: res.data.pages,
           currentPage: pageNumber
         })
         window.location = `/#/pages/${pageNumber}`
+        console.log('currentPage:',this.state.currentPage)
       })
       .catch(err => {
         console.log('Error getting businesses: ',err)

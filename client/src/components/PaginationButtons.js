@@ -4,11 +4,12 @@ import { Button } from 'react-bootstrap'
 const PaginationButtons = ({ first, last, next, prev, loadBusinesses, currentPage }) => {
   const handleSearch = (event) => {
     event.preventDefault()
-    const page = Number(document.getElementById('pageSearch').value)
-    if (typeof page !== 'number') {
-      alert('Must be between 1 - 1000')
+    const page = parseInt(document.getElementById('pageSearch').value)
+    const perPage = parseInt(document.getElementById("perPage").value)
+    if (typeof page !== 'number' || page < 1) {
+      alert('Must be a number greater than 1')
     } else {
-      loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}`)
+      loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}&per_page=${perPage}`)
     }
   }
 
@@ -34,7 +35,7 @@ const PaginationButtons = ({ first, last, next, prev, loadBusinesses, currentPag
             prev
           </Button> : <Button bsStyle="info" bsSize="small" className="pagination-btn">-</Button>}
         <span className="current-page">{currentPage}</span>
-        {currentPage < 1000 ? 
+        {next ? 
           <Button 
             bsStyle="info" 
             bsSize="small" 
@@ -44,7 +45,7 @@ const PaginationButtons = ({ first, last, next, prev, loadBusinesses, currentPag
             next
           </Button> : 
           <Button bsStyle="info" bsSize="small" className="pagination-btn">-</Button>}
-        {currentPage < 1000 ? 
+        {last ? 
           <Button 
             bsStyle="info" 
             bsSize="small" 
@@ -55,6 +56,11 @@ const PaginationButtons = ({ first, last, next, prev, loadBusinesses, currentPag
      
       <form onSubmit={handleSearch} className="page-search-form">
         <input type="text" id="pageSearch" />
+        <select id="perPage">
+          <option value="50">50</option>
+          <option value="25">25</option>
+          <option value="10">10</option>
+        </select>
         <input type="submit" value="submit"/>
       </form>
     </div>
