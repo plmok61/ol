@@ -12,6 +12,7 @@ export default class BusinessesList extends Component {
       businesses: false,
       pages: null,
       currentPage: null,
+      perPage: 50
     }
     this.loadBusinesses = this.loadBusinesses.bind(this)
   }
@@ -22,24 +23,41 @@ export default class BusinessesList extends Component {
     if (isNaN(pageNumber)) {
       pageNumber = 1
     }
-    this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${pageNumber}&per_page=50`)
+    this.loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${pageNumber}&per_page=${this.state.perPage}`)
   }
 
   loadBusinesses (url) {
-    //Gets the page number from the url
-    const pageNumberString = url.match(/&|\?page=(\d+)/)
-    const pageNumber= parseInt(pageNumberString[0].slice(6))
-    console.log('pageNumber: ', typeof pageNumber)
+
+    //Get the per page and page numer from the url
+    const queries = url.split('?')[1].split('&')
+    let pageNumber, perPage
+
+    for (let i = 0; i <queries.length; i++) {
+      if (queries[i].slice(0, 9) === 'per_page=') {
+        perPage = queries[i]
+      }
+      if (queries[i].slice(0, 5) === 'page=') {
+        pageNumber = queries[i]
+      }
+    }
+
+    pageNumber = parseInt(pageNumber.slice(5))
+    perPage = parseInt(perPage.slice(9))
+
+    console.log('n',pageNumber)
+    console.log('pp',perPage)
+   
     axios.get(url)
       .then(res => {
         console.log(res)
         this.setState({
           businesses: res.data.businesses,
           pages: res.data.pages,
-          currentPage: pageNumber
+          currentPage: pageNumber,
+          perPage: perPage
         })
+        console.log('perPage State: ',this.state.perPage)
         window.location = `/#/pages/${pageNumber}`
-        console.log('currentPage:',this.state.currentPage)
       })
       .catch(err => {
         console.log('Error getting businesses: ',err)
@@ -50,6 +68,7 @@ export default class BusinessesList extends Component {
   render () {
     if (this.state.businesses && this.state.businesses.length > 0) {
 
+    //urls of the pages object
     const { first, last, next, prev } = this.state.pages
 
       return (

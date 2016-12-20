@@ -15,7 +15,6 @@ export default class Business extends Component {
         this.setState({
           business: res.data
         })
-        console.log(res.data)
       })
   }
 
@@ -30,7 +29,6 @@ export default class Business extends Component {
     let firstThree = phone.slice(3, 6)
     let lastFour = phone.slice(6)
     phone = `${areaCode}-${firstThree}-${lastFour}`
-    console.log(phone)
       return (
         <div className="business">
           <h3>{name}</h3>
