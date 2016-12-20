@@ -4,6 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 
 import BusinessListItem from './BusinessListItem'
 import PaginationButtons from './PaginationButtons'
+import SearchPagesForm from './SearchPagesForm'
 
 export default class BusinessesList extends Component {
   constructor (props) {
@@ -44,19 +45,14 @@ export default class BusinessesList extends Component {
     pageNumber = parseInt(pageNumber.slice(5))
     perPage = parseInt(perPage.slice(9))
 
-    console.log('n',pageNumber)
-    console.log('pp',perPage)
-   
     axios.get(url)
       .then(res => {
-        console.log(res)
         this.setState({
           businesses: res.data.businesses,
           pages: res.data.pages,
           currentPage: pageNumber,
           perPage: perPage
         })
-        console.log('perPage State: ',this.state.perPage)
         window.location = `/#/pages/${pageNumber}`
       })
       .catch(err => {
@@ -76,14 +72,19 @@ export default class BusinessesList extends Component {
           <Row>
             <Col xs={12} sm={12} md={9} lg={6}>
               <div>
-                <PaginationButtons
-                  first={first}
-                  last={last}
-                  next={next}
-                  prev={prev}
-                  loadBusinesses={this.loadBusinesses}
-                  currentPage={this.state.currentPage}
-                />
+                <div>
+                  <div className="top-pagination">
+                    <PaginationButtons
+                      first={first}
+                      last={last}
+                      next={next}
+                      prev={prev}
+                      loadBusinesses={this.loadBusinesses}
+                      currentPage={this.state.currentPage}
+                    />
+                  </div>
+                  <SearchPagesForm loadBusinesses={this.loadBusinesses} />
+                </div>
                 <div className="business-list">
                 {
                   this.state.businesses.map((business,key) => (
