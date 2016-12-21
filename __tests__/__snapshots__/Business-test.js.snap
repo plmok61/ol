@@ -1,0 +1,11 @@
+exports[`test Business renders 1`] = `
+<div>
+  loading
+</div>
+`;
+
+exports[`test test 2 1`] = `
+<div>
+  loading
+</div>
+`;

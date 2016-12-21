@@ -1,0 +1,28 @@
+exports[`test SearchPagesForm renders 1`] = `
+<form
+  className="page-search-form"
+  onSubmit={[Function]}>
+  <input
+    id="pageSearch"
+    placeholder="Page number"
+    type="text" />
+  <select
+    id="perPage">
+    <option
+      value="50">
+      50
+    </option>
+    <option
+      value="25">
+      25
+    </option>
+    <option
+      value="10">
+      10
+    </option>
+  </select>
+  <input
+    type="submit"
+    value="submit" />
+</form>
+`;

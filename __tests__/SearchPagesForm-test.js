@@ -1,10 +1,10 @@
 import React from 'react'
-import BusinessesList from '../client/src/components/BusinessesList'
+import SearchPagesForm from '../client/src/components/SearchPagesForm'
 import renderer from 'react-test-renderer'
 
-test('BusinessesList renders', () => {
+test('SearchPagesForm renders', () => {
   const component = renderer.create(
-    <BusinessesList params={{page: 1}}/>
+    <SearchPagesForm />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

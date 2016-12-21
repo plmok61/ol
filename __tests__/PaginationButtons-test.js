@@ -1,10 +1,10 @@
 import React from 'react'
-import BusinessesList from '../client/src/components/BusinessesList'
+import PaginationButtons from '../client/src/components/PaginationButtons'
 import renderer from 'react-test-renderer'
 
-test('BusinessesList renders', () => {
+test('PaginationButtons renders', () => {
   const component = renderer.create(
-    <BusinessesList params={{page: 1}}/>
+    <PaginationButtons />
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

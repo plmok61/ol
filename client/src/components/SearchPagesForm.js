@@ -15,7 +15,7 @@ const SearchPagesForm = ({ loadBusinesses }) => {
 
   return (
     <form onSubmit={handleSearch} className="page-search-form">
-      <input type="text" id="pageSearch" />
+      <input type="text" id="pageSearch" placeholder="Page number"/>
       <select id="perPage">
         <option value="50">50</option>
         <option value="25">25</option>

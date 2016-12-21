@@ -1,10 +1,10 @@
 import React from 'react'
-import BusinessesList from '../client/src/components/BusinessesList'
+import Business from '../client/src/components/Business'
 import renderer from 'react-test-renderer'
 
-test('BusinessesList renders', () => {
+test('Business renders', () => {
   const component = renderer.create(
-    <BusinessesList params={{page: 1}}/>
+    <Business params={{id:1}}/>
   )
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()

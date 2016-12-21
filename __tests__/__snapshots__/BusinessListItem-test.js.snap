@@ -1,0 +1,15 @@
+exports[`test BusinessListItem renders 1`] = `
+<div
+  className="business-list-item"
+  onClick={[Function]}>
+  Test Company
+</div>
+`;
+
+exports[`test test 3 1`] = `
+<div
+  className="business-list-item"
+  onClick={[Function]}>
+  Test Company
+</div>
+`;
