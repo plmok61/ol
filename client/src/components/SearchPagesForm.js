@@ -7,7 +7,7 @@ const SearchPagesForm = ({ loadBusinesses }) => {
     const page = parseInt(document.getElementById('pageSearch').value)
     const perPage = parseInt(document.getElementById("perPage").value)
     if (isNaN(page)|| page < 1) {
-      alert('Must be a number greater than 1')
+      alert('Please enter a number greater than 1')
     } else {
       loadBusinesses(`http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses/?page=${page}&per_page=${perPage}`)
     }

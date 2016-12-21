@@ -89,13 +89,11 @@ export default class BusinessesList extends Component {
                 </Row>
                 <Row>
                   <Col xs={12} sm={12} md={12} lg={12}>
-                    <div className="business-list">
                     {
                       this.state.businesses.map((business,key) => (
                         <BusinessListItem key={key} business={business}/>
                       ))
                     }
-                    </div>
                   </Col> 
                 </Row>
                 <Row>
