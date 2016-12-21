@@ -1,0 +1,16 @@
+#pageSearch {
+  width: 50px;
+  margin: 0 5px 0 5px;
+}
+
+#perPage {
+  margin: 0 5px 0 5px;
+}
+
+.page-search-form {
+  margin: 10px auto 20px auto;
+  text-align: center;
+  padding: 3px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+}

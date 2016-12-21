@@ -21,4 +21,6 @@ This will start up the Webpack dev server on port 8080. The dev server allows yo
 
 ##Tests
 This app uses `jest` as the testing suite.
-`npm test`
+```
+npm test
+```

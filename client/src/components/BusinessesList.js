@@ -70,10 +70,10 @@ export default class BusinessesList extends Component {
       return (
         <Grid>
           <Row>
-            <Col xs={12} sm={12} md={9} lg={6}>
+            <Col xs={12} sm={12} md={12} lg={12}>
               <div>
-                <div>
-                  <div className="top-pagination">
+                <Row>
+                  <Col xs={12} sm={6} md={6} lg={6}>
                     <PaginationButtons
                       first={first}
                       last={last}
@@ -82,24 +82,34 @@ export default class BusinessesList extends Component {
                       loadBusinesses={this.loadBusinesses}
                       currentPage={this.state.currentPage}
                     />
-                  </div>
-                  <SearchPagesForm loadBusinesses={this.loadBusinesses} />
-                </div>
-                <div className="business-list">
-                {
-                  this.state.businesses.map((business,key) => (
-                    <BusinessListItem key={key} business={business}/>
-                  ))
-                }
-                </div>
-                <PaginationButtons
-                  first={first}
-                  last={last}
-                  next={next}
-                  prev={prev}
-                  loadBusinesses={this.loadBusinesses}
-                  currentPage={this.state.currentPage}
-                />
+                  </Col>
+                  <Col xs={12} sm={6} md={6} lg={6}>
+                    <SearchPagesForm loadBusinesses={this.loadBusinesses} />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} sm={12} md={12} lg={12}>
+                    <div className="business-list">
+                    {
+                      this.state.businesses.map((business,key) => (
+                        <BusinessListItem key={key} business={business}/>
+                      ))
+                    }
+                    </div>
+                  </Col> 
+                </Row>
+                <Row>
+                  <Col xs={12} sm={12} md={12} lg={12}>
+                    <PaginationButtons
+                      first={first}
+                      last={last}
+                      next={next}
+                      prev={prev}
+                      loadBusinesses={this.loadBusinesses}
+                      currentPage={this.state.currentPage}
+                    />
+                  </Col>
+                </Row>
               </div>
             </Col>
           </Row>

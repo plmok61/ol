@@ -1,10 +1,10 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 const SearchPagesForm = ({ loadBusinesses }) => {
   const handleSearch = (event) => {
     event.preventDefault()
     const page = parseInt(document.getElementById('pageSearch').value)
-    console.log(page)
     const perPage = parseInt(document.getElementById("perPage").value)
     if (isNaN(page)|| page < 1) {
       alert('Must be a number greater than 1')
@@ -15,13 +15,15 @@ const SearchPagesForm = ({ loadBusinesses }) => {
 
   return (
     <form onSubmit={handleSearch} className="page-search-form">
-      <input type="text" id="pageSearch" placeholder="Page number"/>
+      <label>Page #</label>
+      <input type="text" id="pageSearch" />
+      <label>Results per page</label>
       <select id="perPage">
         <option value="50">50</option>
         <option value="25">25</option>
         <option value="10">10</option>
       </select>
-      <input type="submit" value="submit"/>
+      <Button type="submit" bsSize="small" bsStyle="primary">Submit</Button>
     </form>
   )
 }
